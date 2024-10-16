@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/data/datasource/remote/firebase.dart';
-import 'package:ukruzwa/presentation/bloc/Home_event.dart';
-import 'package:ukruzwa/presentation/bloc/Home_state.dart';
+import 'package:ukruzwa/presentation/bloc/home_state.dart';
+import 'package:ukruzwa/presentation/bloc/home_event.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(const HomeStateInitial("")) {
@@ -12,6 +12,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<AddDataEvent>((event, emit) async {
       bool send = await setDataInFirebase(event.name);
+      emit(AddDataState(send));
+    });
+
+    on<AuthEvent>((event, emit) async {
+      bool send = await Auth(event.email, event.pwd);
       emit(AddDataState(send));
     });
   }

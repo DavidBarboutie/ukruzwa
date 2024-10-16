@@ -1,5 +1,3 @@
-import 'package:ukruzwa/presentation/pages/home.dart';
-
 abstract class HomeState {
   const HomeState();
 }
@@ -12,4 +10,9 @@ class HomeStateInitial extends HomeState {
 class AddDataState extends HomeState {
   final bool send;
   const AddDataState(this.send) : super();
+}
+
+class AuthState extends HomeState {
+  final bool send;
+  const AuthState(this.send) : super();
 }
