@@ -1,13 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test01/data/datasource/remote/firebase.dart';
-import 'package:test01/presentation/bloc/home_event.dart';
-import 'package:test01/presentation/bloc/home_state.dart';
+import 'package:ukruzwa/data/datasource/remote/firebase.dart';
+import 'package:ukruzwa/presentation/bloc/Home_event.dart';
+import 'package:ukruzwa/presentation/bloc/Home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(const HomeState("")) {
+  HomeBloc() : super(const HomeStateInitial("")) {
     on<HomeEvent>((event, emit) async {
       String name = await getDataInFirebase();
-      emit(HomeState(name));
+      emit(HomeStateInitial(name));
+    });
+
+    on<AddDataEvent>((event, emit) async {
+      bool send = await setDataInFirebase(event.name);
+      emit(AddDataState(send));
     });
   }
 }
