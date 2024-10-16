@@ -1,38 +1,56 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<String> getDataInFirebase() async {
-  //connexion a la BDD
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  final docname = db.collection("test").doc("XIwvP47zHq3g68QnNPWo");
-  var getdata = await docname.get();
+// Future<String> getDataInFirebase() async {
+//   //connexion a la BDD
+//   FirebaseFirestore db = FirebaseFirestore.instance;
+//   final docname = db.collection("test").doc("XIwvP47zHq3g68QnNPWo");
+//   var getdata = await docname.get();
 
-  Map<String, dynamic>? data = getdata.data();
-  String name = data!["name"];
+//   Map<String, dynamic>? data = getdata.data();
+//   String name = data!["name"];
 
-  return name;
-}
+//   return name;
+// }
 
-Future<bool> setDataInFirebase(String name) async {
+// Future<bool> setDataInFirebase(String name) async {
+//   try {
+//     FirebaseFirestore db = FirebaseFirestore.instance;
+//     final docname = db.collection("test").doc("XIwvP47zHq3g68QnNPWo");
+//     await docname.set({"name": name});
+//     return true;
+//   } catch (error) {
+//     return false;
+//   }
+// }
+
+Future<bool> authent(String email, String pwd) async {
+  bool auth = false;
   try {
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    final docname = db.collection("test").doc("XIwvP47zHq3g68QnNPWo");
-    await docname.set({"name": name});
-    return true;
-  } catch (error) {
-    return false;
+    final credential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: pwd);
+    auth = true;
+  } on FirebaseAuthException catch (e) {
+    auth = false;
+    if (e.code == 'user-not-found') {
+      print('No user found for that email.');
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+    }
   }
+
+  return auth;
 }
 
-Future<bool> Auth(String email, String pwd) async {
-  bool send = false;
+Future<bool> inscription(String email, String pwd) async {
+  bool signup = false;
   try {
     final credential =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: pwd,
     );
-    send = true;
+    signup = true;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
       print('The password provided is too weak.');
@@ -42,5 +60,5 @@ Future<bool> Auth(String email, String pwd) async {
   } catch (e) {
     print(e);
   }
-  return send;
+  return signup;
 }

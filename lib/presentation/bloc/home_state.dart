@@ -13,6 +13,11 @@ class AddDataState extends HomeState {
 }
 
 class AuthState extends HomeState {
-  final bool send;
-  const AuthState(this.send) : super();
+  final bool auth;
+  const AuthState(this.auth) : super();
+}
+
+class InscriptionState extends HomeState {
+  final bool signup;
+  const InscriptionState(this.signup) : super();
 }
