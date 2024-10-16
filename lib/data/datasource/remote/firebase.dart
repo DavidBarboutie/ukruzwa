@@ -1,4 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: avoid_print
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 // Future<String> getDataInFirebase() async {
@@ -25,11 +27,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 // }
 
 Future<bool> authent(String email, String pwd) async {
-  bool auth = false;
+  bool auth = true;
   try {
     final credential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: pwd);
-    auth = true;
   } on FirebaseAuthException catch (e) {
     auth = false;
     if (e.code == 'user-not-found') {

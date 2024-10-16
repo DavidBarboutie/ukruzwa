@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
@@ -22,6 +24,9 @@ class _homeState extends State<Home> {
         create: (context) => HomeBloc(),
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (BuildContext context, state) {
+            print('************** ');
+            print(state);
+
             if (state is HomeStateInitial || state is InscriptionState) {
               //page d'authentification
               return Column(
@@ -30,7 +35,7 @@ class _homeState extends State<Home> {
                 children: [
                   //section email
                   Column(children: [
-                    Text("email"),
+                    const Text("email"),
                     TextFormField(
                       controller: tec_email,
                     )
@@ -38,7 +43,7 @@ class _homeState extends State<Home> {
                   //section password
                   Column(
                     children: [
-                      Text("pwd"),
+                      const Text("pwd"),
                       TextFormField(
                         obscureText: true,
                         controller: tec_pwd,
