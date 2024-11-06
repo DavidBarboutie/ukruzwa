@@ -94,16 +94,15 @@ class _homeState extends State<Home> {
                 );
               });
             } else {
-              return Column(
-                children: [
-                  const Center(
-                      child: Text("Erreur lors de l'authentification")),
+              return AlertDialog(
+                title: const Text("Authentification ratée"),
+                content: const Text("veuillez réessayer"),
+                actions: [
                   TextButton(
-                    onPressed: () {
-                      BlocProvider.of<HomeBloc>(context).add(RetourEvent());
-                    },
-                    child: const Text("retour"),
-                  )
+                      onPressed: () {
+                        BlocProvider.of<HomeBloc>(context).add(RetourEvent());
+                      },
+                      child: const Text("OK"))
                 ],
               );
             }

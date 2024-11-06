@@ -30,15 +30,15 @@ class _homeState extends State<Inscription> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) => HomeBloc(),
-        child: BlocBuilder<HomeBloc, HomeState>(
-          builder: (BuildContext context, state) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
+    return BlocProvider(
+      create: (context) => HomeBloc(),
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (BuildContext context, state) {
+          return Scaffold(
+            body: Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.8,
+                color: Colors.amber,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -203,9 +203,9 @@ class _homeState extends State<Inscription> {
                   ],
                 ),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
