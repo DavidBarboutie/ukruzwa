@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/home_event.dart';
 import 'package:ukruzwa/presentation/bloc/home_state.dart';
+import 'package:ukruzwa/presentation/pages/formulaire_inscription.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -25,9 +26,6 @@ class _homeState extends State<Home> {
         create: (context) => HomeBloc(),
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (BuildContext context, state) {
-            print('************** ');
-            print(state);
-
             if (state is HomeStateInitial || state is InscriptionState) {
               //page d'authentification
               return Column(
@@ -89,8 +87,12 @@ class _homeState extends State<Home> {
                 ],
               );
             } else if (state is AuthState) {
-              return const Center(child: Text("authentification réussi"));
-              //redirection vers l'application
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Inscription()),
+                );
+              });
             } else {
               return Column(
                 children: [
@@ -105,6 +107,7 @@ class _homeState extends State<Home> {
                 ],
               );
             }
+            return const SizedBox();
           },
         ),
       ),

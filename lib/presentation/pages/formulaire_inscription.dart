@@ -4,15 +4,15 @@ import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/home_event.dart';
 import 'package:ukruzwa/presentation/bloc/home_state.dart';
 
-class inscription extends StatefulWidget {
-  const inscription({super.key});
+class Inscription extends StatefulWidget {
+  const Inscription({super.key});
 
   @override
-  State<inscription> createState() => _homeState();
+  State<Inscription> createState() => _homeState();
 }
 
 // ignore: camel_case_types
-class _homeState extends State<inscription> {
+class _homeState extends State<Inscription> {
   TextEditingController nom_groupe = TextEditingController(text: "");
   TextEditingController style_groupe = TextEditingController(text: "");
   TextEditingController set_list = TextEditingController(text: "");
@@ -35,120 +35,106 @@ class _homeState extends State<inscription> {
         create: (context) => HomeBloc(),
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (BuildContext context, state) {
-            return Column(
-              children: [
-                //titre
-                const Text("Formulaire d'inscription"),
-                //formulaire
-                Row(
+            return SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Nom du groupe : "),
-                    TextFormField(controller: nom_groupe),
-                  ],
-                ),
-                Column(
-                  children: [
+                    //titre
+                    const Center(child: Text("Formulaire d'inscription")),
+                    //formulaire
                     Row(
                       children: [
-                        const Text("style_groupe : "),
-                        TextFormField(
-                          controller: style_groupe,
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        const Text("set_list : "),
-                        TextFormField(
-                          controller: set_list,
-                        )
+                        const Text("Nom du groupe : "),
+                        TextFormField(controller: nom_groupe),
                       ],
                     ),
                     Column(
                       children: [
                         Row(
                           children: [
-                            const Text("nom : "),
+                            const Text("style_groupe : "),
                             TextFormField(
-                              controller: nom,
+                              controller: style_groupe,
                             )
                           ],
                         ),
                         Row(
                           children: [
-                            const Text("prenom : "),
-                            TextFormField(controller: prenom)
+                            const Text("set_list : "),
+                            TextFormField(
+                              controller: set_list,
+                            )
                           ],
                         ),
                         Column(
                           children: [
                             Row(
                               children: [
-                                const Text("num_tel : "),
+                                const Text("nom : "),
                                 TextFormField(
-                                  controller: num_tel,
+                                  controller: nom,
                                 )
                               ],
                             ),
                             Row(
                               children: [
-                                const Text("num tel de remplacement : "),
-                                TextFormField(
-                                  controller: num_tel_remplacement,
-                                )
+                                const Text("prenom : "),
+                                TextFormField(controller: prenom)
                               ],
                             ),
                             Column(
                               children: [
                                 Row(
                                   children: [
-                                    const Text("adresse_contact : "),
+                                    const Text("num_tel : "),
                                     TextFormField(
-                                      controller: adresse_contact,
+                                      controller: num_tel,
                                     )
                                   ],
                                 ),
                                 Row(
                                   children: [
-                                    const Text("adresse_repet_groupe : "),
+                                    const Text("num tel de remplacement : "),
                                     TextFormField(
-                                      controller: adresse_repet_groupe,
+                                      controller: num_tel_remplacement,
                                     )
                                   ],
                                 ),
                                 Column(
                                   children: [
-                                    Row(children: [
-                                      const Text("instruments_jouees : "),
-                                      TextFormField(
-                                        controller: instruments_jouees,
-                                      )
-                                    ]),
                                     Row(
                                       children: [
-                                        const Text("chanteur : "),
+                                        const Text("adresse_contact : "),
                                         TextFormField(
-                                          controller: chanteur,
+                                          controller: adresse_contact,
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Text("adresse_repet_groupe : "),
+                                        TextFormField(
+                                          controller: adresse_repet_groupe,
                                         )
                                       ],
                                     ),
                                     Column(
                                       children: [
+                                        Row(children: [
+                                          const Text("instruments_jouees : "),
+                                          TextFormField(
+                                            controller: instruments_jouees,
+                                          )
+                                        ]),
                                         Row(
                                           children: [
-                                            const Text(
-                                                "prix minimum du groupe"),
+                                            const Text("chanteur : "),
                                             TextFormField(
-                                              controller: prix_minimum_grp,
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                                "endroit ou le groupe a jouer"),
-                                            TextFormField(
-                                              controller: endroit_grp_a_jouer,
+                                              controller: chanteur,
                                             )
                                           ],
                                         ),
@@ -157,29 +143,53 @@ class _homeState extends State<inscription> {
                                             Row(
                                               children: [
                                                 const Text(
-                                                    "possède une sono : "),
-                                                Checkbox(
-                                                  value: sono_bool,
-                                                  onChanged: (bool? value) {
-                                                    setState(() {
-                                                      sono_bool = value;
-                                                    });
-                                                  },
+                                                    "prix minimum du groupe"),
+                                                TextFormField(
+                                                  controller: prix_minimum_grp,
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                const Text(
+                                                    "endroit ou le groupe a jouer"),
+                                                TextFormField(
+                                                  controller:
+                                                      endroit_grp_a_jouer,
+                                                )
+                                              ],
+                                            ),
+                                            Column(
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const Text(
+                                                        "possède une sono : "),
+                                                    Checkbox(
+                                                      value: sono_bool,
+                                                      onChanged: (bool? value) {
+                                                        setState(() {
+                                                          sono_bool = value;
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
                                               ],
                                             ),
+                                            ElevatedButton(
+                                                onPressed: () {
+                                                  //envoie des données a la bdd
+                                                  BlocProvider.of<HomeBloc>(
+                                                          context)
+                                                      .add(RetourEvent());
+                                                  //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
+                                                  //sono_bool ? redirect(page_sono) : afficher "inscription finaliser"
+                                                },
+                                                child: const Text(
+                                                    "soummettre le formulaire"))
                                           ],
-                                        ),
-                                        ElevatedButton(
-                                            onPressed: () {
-                                              //envoie des données a la bdd
-                                              BlocProvider.of<HomeBloc>(context)
-                                                  .add(RetourEvent());
-                                              //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
-                                              //sono_bool ? redirect(page_sono) : afficher "inscription finaliser"
-                                            },
-                                            child: const Text(
-                                                "soummettre le formulaire"))
+                                        )
                                       ],
                                     )
                                   ],
@@ -191,8 +201,8 @@ class _homeState extends State<inscription> {
                       ],
                     )
                   ],
-                )
-              ],
+                ),
+              ),
             );
           },
         ),
