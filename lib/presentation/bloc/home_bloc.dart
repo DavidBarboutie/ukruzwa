@@ -24,5 +24,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       bool send = await inscription(event.email, event.pwd);
       emit(InscriptionState(send));
     });
+
+    on<RetourEvent>((event, emit) async {
+      emit(const HomeStateInitial());
+    });
   }
 }

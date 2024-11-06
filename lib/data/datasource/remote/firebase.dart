@@ -34,7 +34,7 @@ Future<bool> authent(String email, String pwd) async {
   } on FirebaseAuthException catch (e) {
     auth = false;
     if (e.code == 'user-not-found') {
-      print('No user found for that email.');
+      ('No user found for that email.');
     } else if (e.code == 'wrong-password') {
       print('Wrong password provided for that user.');
     }

@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _homeState();
 }
 
+// ignore: camel_case_types
 class _homeState extends State<Home> {
   TextEditingController tec_email = TextEditingController(text: "");
   TextEditingController tec_pwd = TextEditingController(text: "");
@@ -59,6 +60,8 @@ class _homeState extends State<Home> {
                               BlocProvider.of<HomeBloc>(context).add(
                                   InscriptionEvent(
                                       tec_email.text, tec_pwd.text));
+                              tec_email.text = "";
+                              tec_pwd.text = "";
                             },
                             child: const Text("s'inscrire"),
                           ),
@@ -87,9 +90,20 @@ class _homeState extends State<Home> {
               );
             } else if (state is AuthState) {
               return const Center(child: Text("authentification réussi"));
+              //redirection vers l'application
             } else {
-              return const Center(
-                  child: Text("Erreur lors de l'authentification"));
+              return Column(
+                children: [
+                  const Center(
+                      child: Text("Erreur lors de l'authentification")),
+                  TextButton(
+                    onPressed: () {
+                      BlocProvider.of<HomeBloc>(context).add(RetourEvent());
+                    },
+                    child: const Text("retour"),
+                  )
+                ],
+              );
             }
           },
         ),

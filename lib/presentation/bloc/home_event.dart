@@ -18,3 +18,7 @@ class InscriptionEvent extends HomeEvent {
   final String pwd;
   const InscriptionEvent(this.email, this.pwd) : super();
 }
+
+class RetourEvent extends HomeEvent {
+  RetourEvent() : super();
+}
