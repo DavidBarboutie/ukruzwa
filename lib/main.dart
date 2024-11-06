@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/utils/constants/firebase_options.dart';
-import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
+import 'package:ukruzwa/presentation/bloc/home/home_bloc.dart';
 import 'package:ukruzwa/presentation/pages/home.dart';
 
 void main() async {

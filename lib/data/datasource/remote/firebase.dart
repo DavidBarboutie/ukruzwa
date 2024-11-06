@@ -31,6 +31,7 @@ Future<bool> authent(String email, String pwd) async {
   try {
     final credential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: pwd);
+    credential.user;
   } on FirebaseAuthException catch (e) {
     auth = false;
     if (e.code == 'user-not-found') {
@@ -51,6 +52,7 @@ Future<bool> inscription(String email, String pwd) async {
       email: email,
       password: pwd,
     );
+    credential.user;
     signup = true;
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {

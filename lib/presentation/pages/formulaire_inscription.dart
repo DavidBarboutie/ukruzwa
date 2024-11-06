@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
-import 'package:ukruzwa/presentation/bloc/home_event.dart';
-import 'package:ukruzwa/presentation/bloc/home_state.dart';
+import 'package:ukruzwa/presentation/bloc/inscription/inscription_event.dart';
+import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
+import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({super.key});
 
   @override
-  State<Inscription> createState() => _homeState();
+  State<Inscription> createState() => _inscriptionState();
 }
 
 // ignore: camel_case_types
-class _homeState extends State<Inscription> {
-  TextEditingController nom_groupe = TextEditingController(text: "");
-  TextEditingController style_groupe = TextEditingController(text: "");
-  TextEditingController set_list = TextEditingController(text: "");
+class _inscriptionState extends State<Inscription> {
+  TextEditingController nomGroupe = TextEditingController(text: "");
+  TextEditingController styleGroupe = TextEditingController(text: "");
+  TextEditingController setList = TextEditingController(text: "");
   TextEditingController nom = TextEditingController(text: "");
   TextEditingController prenom = TextEditingController(text: "");
-  TextEditingController num_tel = TextEditingController(text: "");
-  TextEditingController num_tel_remplacement = TextEditingController(text: "");
-  TextEditingController adresse_contact = TextEditingController(text: "");
-  TextEditingController adresse_repet_groupe = TextEditingController(text: "");
-  TextEditingController instruments_jouees = TextEditingController(text: "");
+  TextEditingController numTel = TextEditingController(text: "");
+  TextEditingController numTelRemplacement = TextEditingController(text: "");
+  TextEditingController adresseContact = TextEditingController(text: "");
+  TextEditingController adresseRepetGroupe = TextEditingController(text: "");
+  TextEditingController instrumentsJouees = TextEditingController(text: "");
   TextEditingController chanteur = TextEditingController(text: "");
-  TextEditingController prix_minimum_grp = TextEditingController(text: "");
-  TextEditingController endroit_grp_a_jouer = TextEditingController(text: "");
-  bool? sono_bool = false;
+  TextEditingController prixMinimumGrp = TextEditingController(text: "");
+  TextEditingController endroitGrpAJouer = TextEditingController(text: "");
+  bool? sonoBool = false;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeBloc(),
-      child: BlocBuilder<HomeBloc, HomeState>(
+      create: (context) => InscriptionBloc(),
+      child: BlocBuilder<InscriptionBloc, InscriptionState>(
         builder: (BuildContext context, state) {
           return Scaffold(
             body: Center(
@@ -49,7 +49,7 @@ class _homeState extends State<Inscription> {
                     Row(
                       children: [
                         const Text("Nom du groupe : "),
-                        TextFormField(controller: nom_groupe),
+                        TextFormField(controller: nomGroupe),
                       ],
                     ),
                     Column(
@@ -58,7 +58,7 @@ class _homeState extends State<Inscription> {
                           children: [
                             const Text("style_groupe : "),
                             TextFormField(
-                              controller: style_groupe,
+                              controller: styleGroupe,
                             )
                           ],
                         ),
@@ -66,7 +66,7 @@ class _homeState extends State<Inscription> {
                           children: [
                             const Text("set_list : "),
                             TextFormField(
-                              controller: set_list,
+                              controller: setList,
                             )
                           ],
                         ),
@@ -92,7 +92,7 @@ class _homeState extends State<Inscription> {
                                   children: [
                                     const Text("num_tel : "),
                                     TextFormField(
-                                      controller: num_tel,
+                                      controller: numTel,
                                     )
                                   ],
                                 ),
@@ -100,7 +100,7 @@ class _homeState extends State<Inscription> {
                                   children: [
                                     const Text("num tel de remplacement : "),
                                     TextFormField(
-                                      controller: num_tel_remplacement,
+                                      controller: numTelRemplacement,
                                     )
                                   ],
                                 ),
@@ -110,7 +110,7 @@ class _homeState extends State<Inscription> {
                                       children: [
                                         const Text("adresse_contact : "),
                                         TextFormField(
-                                          controller: adresse_contact,
+                                          controller: adresseContact,
                                         )
                                       ],
                                     ),
@@ -118,7 +118,7 @@ class _homeState extends State<Inscription> {
                                       children: [
                                         const Text("adresse_repet_groupe : "),
                                         TextFormField(
-                                          controller: adresse_repet_groupe,
+                                          controller: adresseRepetGroupe,
                                         )
                                       ],
                                     ),
@@ -127,7 +127,7 @@ class _homeState extends State<Inscription> {
                                         Row(children: [
                                           const Text("instruments_jouees : "),
                                           TextFormField(
-                                            controller: instruments_jouees,
+                                            controller: instrumentsJouees,
                                           )
                                         ]),
                                         Row(
@@ -145,7 +145,7 @@ class _homeState extends State<Inscription> {
                                                 const Text(
                                                     "prix minimum du groupe"),
                                                 TextFormField(
-                                                  controller: prix_minimum_grp,
+                                                  controller: prixMinimumGrp,
                                                 )
                                               ],
                                             ),
@@ -154,8 +154,7 @@ class _homeState extends State<Inscription> {
                                                 const Text(
                                                     "endroit ou le groupe a jouer"),
                                                 TextFormField(
-                                                  controller:
-                                                      endroit_grp_a_jouer,
+                                                  controller: endroitGrpAJouer,
                                                 )
                                               ],
                                             ),
@@ -166,10 +165,10 @@ class _homeState extends State<Inscription> {
                                                     const Text(
                                                         "possède une sono : "),
                                                     Checkbox(
-                                                      value: sono_bool,
+                                                      value: sonoBool,
                                                       onChanged: (bool? value) {
                                                         setState(() {
-                                                          sono_bool = value;
+                                                          sonoBool = value;
                                                         });
                                                       },
                                                     ),
@@ -180,7 +179,8 @@ class _homeState extends State<Inscription> {
                                             ElevatedButton(
                                                 onPressed: () {
                                                   //envoie des données a la bdd
-                                                  BlocProvider.of<HomeBloc>(
+                                                  BlocProvider.of<
+                                                              InscriptionBloc>(
                                                           context)
                                                       .add(RetourEvent());
                                                   //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription

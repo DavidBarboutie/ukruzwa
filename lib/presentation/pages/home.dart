@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ukruzwa/presentation/bloc/home_bloc.dart';
-import 'package:ukruzwa/presentation/bloc/home_event.dart';
-import 'package:ukruzwa/presentation/bloc/home_state.dart';
+import 'package:ukruzwa/presentation/bloc/home/home_bloc.dart';
+import 'package:ukruzwa/presentation/bloc/home/home_event.dart';
+import 'package:ukruzwa/presentation/bloc/home/home_state.dart';
 import 'package:ukruzwa/presentation/pages/formulaire_inscription.dart';
 
 class Home extends StatefulWidget {
@@ -86,7 +86,9 @@ class _homeState extends State<Home> {
                         )
                 ],
               );
+              //si authentification reussi
             } else if (state is AuthState) {
+              //redirection vers la page du formulaire d'inscription
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushReplacement(
                   context,
@@ -94,9 +96,11 @@ class _homeState extends State<Home> {
                 );
               });
             } else {
+              //si authentification ratee
+              //popup
               return AlertDialog(
                 title: const Text("Authentification ratée"),
-                content: const Text("veuillez réessayer"),
+                content: const Text("Veuillez réessayer"),
                 actions: [
                   TextButton(
                       onPressed: () {
