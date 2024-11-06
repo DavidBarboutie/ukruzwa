@@ -67,6 +67,8 @@ class _homeState extends State<Home> {
                             onPressed: () {
                               BlocProvider.of<HomeBloc>(context)
                                   .add(AuthEvent(tec_email.text, tec_pwd.text));
+                              tec_email.text = "";
+                              tec_pwd.text = "";
                             },
                             child: const Text("s'authentifier"),
                           )
