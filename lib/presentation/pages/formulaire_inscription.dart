@@ -36,100 +36,203 @@ class _InscriptionState extends State<Inscription> {
           return Scaffold(
             body: Center(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.07),
-                    const Center(
-                      child: Text("Formulaire d'inscription"),
-                    ),
-                    SizedBox(height: MediaQuery.sizeOf(context).height * 0.07),
-                    //formulaire
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text("Nom du groupe : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: nomGroupe),
+                child: Container(
+                  color: Colors.grey,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.07),
+                      const Center(
+                        child: Text(
+                          "Formulaire d'inscription",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.white),
                         ),
-                        const Text("style_groupe : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: styleGroupe),
-                        ),
-                        const Text("set_list : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: setList),
-                        ),
-                        const Text("nom : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: nom),
-                        ),
-                        const Text("prenom : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: prenom),
-                        ),
-                        const Text("num_tel : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: numTel),
-                        ),
-                        const Text("num tel de remplacement : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: numTelRemplacement),
-                        ),
-                        const Text("adresse_contact : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: adresseContact),
-                        ),
-                        const Text("adresse_repet_groupe : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: adresseRepetGroupe),
-                        ),
-                        const Text("instruments_jouees : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: instrumentsJouees),
-                        ),
-                        const Text("chanteur : "),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: chanteur),
-                        ),
-                        const Text("prix minimum du groupe"),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: prixMinimumGrp),
-                        ),
-                        const Text("endroit ou le groupe a jouer"),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          child: TextFormField(controller: endroitGrpAJouer),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("possède une sono : "),
-                            Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.1,
-                                child: Checkbox(
-                                  value: sonoBool,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      sonoBool = value;
-                                    });
-                                  },
-                                )),
-                          ],
-                        ),
-                        ElevatedButton(
+                      ),
+                      SizedBox(
+                          height: MediaQuery.sizeOf(context).height * 0.07),
+                      //formulaire
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Column(
+                              children: [
+                                const Text(
+                                  "Nom du groupe : ",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.white),
+                                ),
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.1,
+                                  child: TextFormField(controller: nomGroupe),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const Text(
+                            "style groupe : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: styleGroupe),
+                          ),
+                          const Text(
+                            "set list : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: setList),
+                          ),
+                          const Text(
+                            "nom : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: nom),
+                          ),
+                          const Text(
+                            "prenom : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: prenom),
+                          ),
+                          const Text(
+                            "num tel : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: numTel),
+                          ),
+                          const Text(
+                            "num tel de remplacement : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child:
+                                TextFormField(controller: numTelRemplacement),
+                          ),
+                          const Text(
+                            "adresse contact : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: adresseContact),
+                          ),
+                          const Text(
+                            "adresse repet groupe : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child:
+                                TextFormField(controller: adresseRepetGroupe),
+                          ),
+                          const Text(
+                            "instruments jouees : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: instrumentsJouees),
+                          ),
+                          const Text(
+                            "chanteur : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: chanteur),
+                          ),
+                          const Text(
+                            "prix minimum du groupe : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: prixMinimumGrp),
+                          ),
+                          const Text(
+                            "endroit(s) où le groupe a jouer : ",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white),
+                          ),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.1,
+                            child: TextFormField(controller: endroitGrpAJouer),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "possède une sono : ",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.white),
+                              ),
+                              Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.1,
+                                  child: Checkbox(
+                                    value: sonoBool,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        sonoBool = value;
+                                      });
+                                    },
+                                  )),
+                            ],
+                          ),
+                          ElevatedButton(
                             onPressed: () {
                               //envoie des données a la bdd
                               BlocProvider.of<InscriptionBloc>(context)
@@ -137,10 +240,20 @@ class _InscriptionState extends State<Inscription> {
                               //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
                               //sono_bool ? redirect(page_sono) : afficher "inscription finaliser"
                             },
-                            child: const Text("soummettre le formulaire"))
-                      ],
-                    ),
-                  ],
+                            child: const Text(
+                              "soummettre le formulaire",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.05)
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
