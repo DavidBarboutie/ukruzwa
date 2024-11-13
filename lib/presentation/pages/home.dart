@@ -110,6 +110,7 @@ class _homeState extends State<Home> {
                 ],
               );
             }
+            //retourne une case vide dans tous les cas
             return const SizedBox();
           },
         ),
