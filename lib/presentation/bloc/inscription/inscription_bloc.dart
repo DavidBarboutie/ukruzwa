@@ -23,6 +23,7 @@ class InscriptionBloc extends Bloc<InscriptionEvent, InscriptionState> {
           "",
           "",
           "");
+      createCandidat(event.numTel, event.numTelRemplacement);
     });
 
     on<RetourEvent>((event, emit) async {

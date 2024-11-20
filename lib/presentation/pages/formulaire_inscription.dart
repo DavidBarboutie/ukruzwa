@@ -7,6 +7,7 @@ import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
 
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_event.dart';
+import 'package:ukruzwa/presentation/pages/formulaire_sono.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({super.key});
@@ -260,7 +261,35 @@ class _InscriptionState extends State<Inscription> {
                                 sonoBool,
                               ));
                               //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
-                              //sono_bool ? redirect(page_sono) : afficher "inscription finaliser"
+                              bool sono;
+                              if (sonoBool == null) {
+                                sono = false;
+                              } else {
+                                sono = sonoBool!;
+                              }
+                              sono
+                                  ? WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => const Sono()),
+                                      );
+                                    })
+                                  : AlertDialog(
+                                      title: const Text("inscription"),
+                                      content:
+                                          const Text("inscription finalisée"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              BlocProvider.of<InscriptionBloc>(
+                                                      context)
+                                                  .add(RetourEvent());
+                                            },
+                                            child: const Text("OK"))
+                                      ],
+                                    );
                             },
                             child: const Text(
                               "soummettre le formulaire",

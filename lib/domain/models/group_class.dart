@@ -7,8 +7,6 @@ class GroupClass {
   String? endroitJouee;
   String? ingeSon;
   String? professionnel;
-  String? puissanceSono;
-  String? locationSono;
   String? locationInge;
 
   GroupClass(
@@ -20,7 +18,5 @@ class GroupClass {
       this.endroitJouee,
       this.ingeSon,
       this.professionnel,
-      this.puissanceSono,
-      this.locationSono,
       this.locationInge);
 }

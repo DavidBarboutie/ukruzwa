@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ukruzwa/domain/models/ville_class.dart';
+import 'package:ukruzwa/domain/models/candidat_class.dart';
+import 'package:ukruzwa/domain/models/group_class.dart';
+import 'package:ukruzwa/domain/models/sono_class.dart';
 
 Future<List<Map<String, dynamic>>> getDocsInFirebase(String collection) async {
   //connexion a la BDD
@@ -26,20 +28,8 @@ Future<void> createGroup(
     String? puissanceSono,
     String? locationSono,
     String? locationInge) async {
-  // On ajoute la ville et l'utilisateur en base
-
-  final groupTemp = GroupClass(
-      nomGroupe,
-      setList,
-      adresseRepet,
-      nbChanteurs,
-      prixMin,
-      endroitJouee,
-      ingeSon,
-      professionnel,
-      puissanceSono,
-      locationSono,
-      locationInge);
+  final groupTemp = GroupClass(nomGroupe, setList, adresseRepet, nbChanteurs,
+      prixMin, endroitJouee, ingeSon, professionnel, locationInge);
 
   FirebaseFirestore db = FirebaseFirestore.instance;
   final docVille = db.collection("Groupe").doc(().toString());
@@ -52,12 +42,46 @@ Future<void> createGroup(
     "endroitJouee": groupTemp.endroitJouee,
     "ingeSon": groupTemp.ingeSon,
     "professionnel": groupTemp.professionnel,
-    "puissanceSono": groupTemp.puissanceSono,
-    "locationSono": groupTemp.locationSono,
     "locationInge": groupTemp.locationInge,
   });
 }
 
+//ajout du candidat dans la BDD
+Future<void> createCandidat(
+  String? numTel,
+  String? numTelBackup,
+) async {
+  final groupTemp = CandidatClass(numTel, numTelBackup);
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  final docVille = db.collection("Candidat").doc(().toString());
+  await docVille.set({
+    "numTel": groupTemp.numTel,
+    "numTelBackup": groupTemp.numTelBackup,
+  });
+}
+
+//ajout de la sono dans la BDD
+Future<void> createSono(
+  bool? ingeSon,
+  bool? professionnel,
+  String? modeleSono,
+  String? puissanceSono,
+  int? prixLocSono,
+  int? prixLocInge,
+) async {
+  final groupTemp = SonoClass(ingeSon, professionnel, modeleSono, puissanceSono,
+      prixLocSono, prixLocInge);
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  final docVille = db.collection("Sonorosation").doc(().toString());
+  await docVille.set({
+    "ingeSon": groupTemp.ingeSon,
+    "professionnel": groupTemp.professionnel,
+    "modeleSono": groupTemp.modeleSono,
+    "puissanceSono": groupTemp.puissanceSono,
+    "prixLocSono": groupTemp.prixLocSono,
+    "prixLocInge": groupTemp.prixLocInge,
+  });
+}
 // Future<bool> setNomGrp(String? nomGrp) async {
 //   try {
 //     final docname = setdata();
