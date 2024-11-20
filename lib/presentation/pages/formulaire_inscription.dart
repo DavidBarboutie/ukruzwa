@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
@@ -28,7 +29,7 @@ class _InscriptionState extends State<Inscription> {
   TextEditingController adresseRepetGroupe = TextEditingController(text: "");
   TextEditingController instrumentsJouees = TextEditingController(text: "");
   TextEditingController chanteur = TextEditingController(text: "");
-  TextEditingController prixMinimumGrp = TextEditingController(text: "0");
+  TextEditingController prixMinimumGrp = TextEditingController(text: "");
   TextEditingController endroitGrpAJouer = TextEditingController(text: "");
   bool? sonoBool = false;
   @override
@@ -191,17 +192,20 @@ class _InscriptionState extends State<Inscription> {
                             height: MediaQuery.of(context).size.height * 0.1,
                             child: TextFormField(controller: chanteur),
                           ),
-                          const Text(
-                            "prix minimum du groupe : ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.white),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            child: TextFormField(controller: prixMinimumGrp),
-                          ),
+                          //filtrer les chiffres pour le prix
+                          TextFormField(
+                              controller: prixMinimumGrp,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              decoration: const InputDecoration(
+                                  labelText: "prix minimum du groupe : ",
+                                  labelStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ))),
                           const Text(
                             "endroit(s) où le groupe a jouer : ",
                             style: TextStyle(

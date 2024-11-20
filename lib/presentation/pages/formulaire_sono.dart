@@ -21,8 +21,8 @@ class _SonoState extends State<Sono> {
   bool? proBool = false;
   TextEditingController modeleSono = TextEditingController(text: "");
   TextEditingController puissanceSono = TextEditingController(text: "");
-  TextEditingController prixLocSono = TextEditingController(text: "");
-  TextEditingController prixLocInge = TextEditingController(text: "");
+  TextEditingController prixLocSono = TextEditingController(text: "0");
+  TextEditingController prixLocInge = TextEditingController(text: "0");
 
   @override
   Widget build(BuildContext context) {

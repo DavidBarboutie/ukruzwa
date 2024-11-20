@@ -12,18 +12,25 @@ class InscriptionBloc extends Bloc<InscriptionEvent, InscriptionState> {
 
     on<AddDataInscriptionEvent>((event, emit) async {
       createGroup(
-          event.nomGrp,
-          event.setList,
-          event.adresseRepet,
-          event.chanteur,
-          event.prixMinGrp,
-          event.endroitGrpAjouer,
-          "",
-          "",
-          "",
-          "",
-          "");
-      createCandidat(event.numTel, event.numTelRemplacement);
+        event.nomGrp,
+        event.setList,
+        event.styleGrp,
+        event.adresseRepet,
+        event.chanteur,
+        event.prixMinGrp,
+        event.endroitGrpAjouer,
+      );
+
+      createCandidat(
+        event.numTel,
+        event.numTelRemplacement,
+      );
+
+      createContact(
+        event.nom,
+        event.prenom,
+        event.adresseContact,
+      );
     });
 
     on<RetourEvent>((event, emit) async {

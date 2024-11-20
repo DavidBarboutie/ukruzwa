@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ukruzwa/domain/models/candidat_class.dart';
+import 'package:ukruzwa/domain/models/contact_class.dart';
 import 'package:ukruzwa/domain/models/group_class.dart';
 import 'package:ukruzwa/domain/models/sono_class.dart';
 
@@ -17,32 +18,27 @@ Future<List<Map<String, dynamic>>> getDocsInFirebase(String collection) async {
 }
 
 Future<void> createGroup(
-    String? nomGroupe,
-    String? setList,
-    String? adresseRepet,
-    int? nbChanteurs,
-    int? prixMin,
-    String? endroitJouee,
-    String? ingeSon,
-    String? professionnel,
-    String? puissanceSono,
-    String? locationSono,
-    String? locationInge) async {
-  final groupTemp = GroupClass(nomGroupe, setList, adresseRepet, nbChanteurs,
-      prixMin, endroitJouee, ingeSon, professionnel, locationInge);
+  String? nomGroupe,
+  String? setList,
+  String? styles,
+  String? adresseRepet,
+  int? nbChanteurs,
+  int? prixMin,
+  String? endroitJouee,
+) async {
+  final groupTemp = GroupClass(nomGroupe, setList, styles, adresseRepet,
+      nbChanteurs, prixMin, endroitJouee);
 
   FirebaseFirestore db = FirebaseFirestore.instance;
-  final docVille = db.collection("Groupe").doc(().toString());
+  final docVille = db.collection("Groupe").doc();
   await docVille.set({
     "nomGroupe": groupTemp.nomGroupe,
     "setList": groupTemp.setList,
+    "styles": groupTemp.styles,
     "adresseRepet": groupTemp.adresseRepet,
     "nbChanteurs": groupTemp.nbChanteurs,
     "prixMin": groupTemp.prixMin,
     "endroitJouee": groupTemp.endroitJouee,
-    "ingeSon": groupTemp.ingeSon,
-    "professionnel": groupTemp.professionnel,
-    "locationInge": groupTemp.locationInge,
   });
 }
 
@@ -53,10 +49,26 @@ Future<void> createCandidat(
 ) async {
   final groupTemp = CandidatClass(numTel, numTelBackup);
   FirebaseFirestore db = FirebaseFirestore.instance;
-  final docVille = db.collection("Candidat").doc(().toString());
+  final docVille = db.collection("Candidat").doc();
   await docVille.set({
     "numTel": groupTemp.numTel,
     "numTelBackup": groupTemp.numTelBackup,
+  });
+}
+
+//ajout du candidat dans la BDD
+Future<void> createContact(
+  String? nom,
+  String? prenom,
+  String? adresseContact,
+) async {
+  final groupTemp = ContactClass(nom, prenom, adresseContact);
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  final docVille = db.collection("Contact").doc();
+  await docVille.set({
+    "nom": groupTemp.nom,
+    "prenom": groupTemp.prenom,
+    "adresseContact": groupTemp.adresseContact,
   });
 }
 
@@ -72,7 +84,7 @@ Future<void> createSono(
   final groupTemp = SonoClass(ingeSon, professionnel, modeleSono, puissanceSono,
       prixLocSono, prixLocInge);
   FirebaseFirestore db = FirebaseFirestore.instance;
-  final docVille = db.collection("Sonorosation").doc(().toString());
+  final docVille = db.collection("Sonorosation").doc();
   await docVille.set({
     "ingeSon": groupTemp.ingeSon,
     "professionnel": groupTemp.professionnel,
@@ -82,157 +94,6 @@ Future<void> createSono(
     "prixLocInge": groupTemp.prixLocInge,
   });
 }
-// Future<bool> setNomGrp(String? nomGrp) async {
-//   try {
-//     final docname = setdata();
-//     await docname.set({"nom de groupe": nomGrp});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setStyleGrp(String? styleGrp) async {
-//   try {
-//     final docname = setdata();
-//     await docname.set({"style du groupe": styleGrp});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setSetList(String? setList) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"setList": setList});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setNom(String? nom) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"nom": nom});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setPrenom(String? prenom) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"prenom": prenom});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setNumTel(String? numTel) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"numTel": numTel});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setNumTelRemplacement(String? numTelRemplacement) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"numTelRemplacement": numTelRemplacement});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setAdresseContact(String? adresseContact) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"adresseContact": adresseContact});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setAdresseRepet(String? adresseRepet) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"adresseRepet": adresseRepet});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setsInstrumentsJouees(String? instrumentsJouees) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"instrumentsJouees": instrumentsJouees});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setChanteur(String? chanteur) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"chanteur": chanteur});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setsPrixMinGrp(int? prixMinGrp) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"prixMinGrp": prixMinGrp});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setEndroitGrpAjouer(String? endroitGrpAjouer) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"endroitGrpAjouer": endroitGrpAjouer});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
-
-// Future<bool> setSono(bool? sono) async {
-//   try {
-//     FirebaseFirestore db = FirebaseFirestore.instance;
-//     final docname = db.collection("inscription").doc();
-//     await docname.set({"sono": sono});
-//     return true;
-//   } catch (error) {
-//     return false;
-//   }
-// }
 
 //fonction qui authentifie l'utilisateur
 Future<bool> authent(String email, String pwd) async {
