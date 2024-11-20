@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
@@ -24,7 +27,7 @@ class _InscriptionState extends State<Inscription> {
   TextEditingController adresseRepetGroupe = TextEditingController(text: "");
   TextEditingController instrumentsJouees = TextEditingController(text: "");
   TextEditingController chanteur = TextEditingController(text: "");
-  TextEditingController prixMinimumGrp = TextEditingController(text: "");
+  TextEditingController prixMinimumGrp = TextEditingController(text: "0");
   TextEditingController endroitGrpAJouer = TextEditingController(text: "");
   bool? sonoBool = false;
   @override
@@ -234,9 +237,28 @@ class _InscriptionState extends State<Inscription> {
                           ),
                           ElevatedButton(
                             onPressed: () {
+                              //compte le nb de chanteurs
+                              String chanteurs = chanteur.text;
+                              List<String> singers = chanteurs.split(" ");
+
                               //envoie des données a la bdd
                               BlocProvider.of<InscriptionBloc>(context)
-                                  .add(RetourEvent());
+                                  .add(AddDataInscriptionEvent(
+                                nomGroupe.text,
+                                styleGroupe.text,
+                                setList.text,
+                                nom.text,
+                                prenom.text,
+                                numTel.text,
+                                numTelRemplacement.text,
+                                adresseContact.text,
+                                adresseRepetGroupe.text,
+                                instrumentsJouees.text,
+                                singers.length,
+                                int.parse(prixMinimumGrp.text),
+                                endroitGrpAJouer.text,
+                                sonoBool,
+                              ));
                               //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
                               //sono_bool ? redirect(page_sono) : afficher "inscription finaliser"
                             },

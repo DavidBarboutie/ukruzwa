@@ -11,22 +11,18 @@ class InscriptionBloc extends Bloc<InscriptionEvent, InscriptionState> {
     // });
 
     on<AddDataInscriptionEvent>((event, emit) async {
-      bool send = await setNomGrp(event.nomGrp);
-      setStyleGrp(event.styleGrp);
-      setSetList(event.setList);
-      setNom(event.nom);
-      setPrenom(event.prenom);
-      setNumTel(event.numTel);
-      setNumTelRemplacement(event.numTelRemplacement);
-      setAdresseContact(event.adresseContact);
-      setAdresseRepet(event.adresseRepet);
-      setAdresseContact(event.adresseContact);
-      setsInstrumentsJouees(event.instrumentsJouees);
-      setChanteur(event.chanteur);
-      setsPrixMinGrp(event.prixMinGrp);
-      setEndroitGrpAjouer(event.endroitGrpAjouer);
-      setSono(event.sono);
-      emit(AddDataState(send));
+      createGroup(
+          event.nomGrp,
+          event.setList,
+          event.adresseRepet,
+          event.chanteur,
+          event.prixMinGrp,
+          event.endroitGrpAjouer,
+          "",
+          "",
+          "",
+          "",
+          "");
     });
 
     on<RetourEvent>((event, emit) async {

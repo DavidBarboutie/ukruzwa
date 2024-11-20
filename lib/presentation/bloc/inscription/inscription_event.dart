@@ -13,7 +13,7 @@ class AddDataInscriptionEvent extends InscriptionEvent {
   final String? adresseContact;
   final String? adresseRepet;
   final String? instrumentsJouees;
-  final String? chanteur;
+  final int? chanteur;
   final int? prixMinGrp;
   final String? endroitGrpAjouer;
   final bool? sono;
