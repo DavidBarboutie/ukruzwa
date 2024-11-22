@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ukruzwa/domain/models/group_class.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
-
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_event.dart';
 import 'package:ukruzwa/presentation/pages/formulaire_sono.dart';
 
@@ -29,7 +29,7 @@ class _InscriptionState extends State<Inscription> {
   TextEditingController adresseRepetGroupe = TextEditingController(text: "");
   TextEditingController instrumentsJouees = TextEditingController(text: "");
   TextEditingController chanteur = TextEditingController(text: "");
-  TextEditingController prixMinimumGrp = TextEditingController(text: "");
+  TextEditingController prixMinimumGrp = TextEditingController(text: "0");
   TextEditingController endroitGrpAJouer = TextEditingController(text: "");
   bool? sonoBool = false;
   @override
@@ -247,25 +247,26 @@ class _InscriptionState extends State<Inscription> {
                               List<String> singers = chanteurs.split(" ");
 
                               //envoie des données a la bdd
-                              BlocProvider.of<InscriptionBloc>(context)
-                                  .add(AddDataInscriptionEvent(
-                                nomGroupe.text,
-                                styleGroupe.text,
-                                setList.text,
-                                nom.text,
-                                prenom.text,
-                                numTel.text,
-                                numTelRemplacement.text,
-                                adresseContact.text,
-                                adresseRepetGroupe.text,
-                                instrumentsJouees.text,
-                                singers.length,
-                                int.parse(prixMinimumGrp.text),
-                                endroitGrpAJouer.text,
-                                sonoBool,
-                              ));
+                              BlocProvider.of<InscriptionBloc>(context).add(
+                                AddDataInscriptionEvent(
+                                  nomGroupe.text,
+                                  styleGroupe.text,
+                                  setList.text,
+                                  nom.text,
+                                  prenom.text,
+                                  numTel.text,
+                                  numTelRemplacement.text,
+                                  adresseContact.text,
+                                  adresseRepetGroupe.text,
+                                  instrumentsJouees.text,
+                                  singers.length,
+                                  int.parse(prixMinimumGrp.text),
+                                  endroitGrpAJouer.text,
+                                  sonoBool,
+                                ),
+                              );
                               //si sono est cocher rediriger vers le formulaire de sono, sinon finaliser l'inscription
-                              bool sono;
+                              bool sono = false;
                               if (sonoBool == null) {
                                 sono = false;
                               } else {
@@ -273,26 +274,33 @@ class _InscriptionState extends State<Inscription> {
                               }
                               sono
                                   ? WidgetsBinding.instance
-                                      .addPostFrameCallback((_) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const Sono()),
-                                      );
-                                    })
-                                  : AlertDialog(
-                                      title: const Text("inscription"),
-                                      content:
-                                          const Text("inscription finalisée"),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              BlocProvider.of<InscriptionBloc>(
-                                                      context)
-                                                  .add(RetourEvent());
-                                            },
-                                            child: const Text("OK"))
-                                      ],
+                                      .addPostFrameCallback(
+                                      (_) {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const Sono(),
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: const Text("inscription"),
+                                          content: const Text(
+                                              "inscription finalisée"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: const Text("OK"),
+                                            )
+                                          ],
+                                        );
+                                      },
                                     );
                             },
                             child: const Text(
@@ -304,7 +312,7 @@ class _InscriptionState extends State<Inscription> {
                             ),
                           ),
                           SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.05)
+                              height: MediaQuery.sizeOf(context).height * 0.05),
                         ],
                       ),
                     ],

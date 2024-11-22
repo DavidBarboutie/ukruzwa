@@ -1,5 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ukruzwa/data/datasource/remote/firebase.dart';
+import 'package:ukruzwa/domain/models/candidat_class.dart';
+import 'package:ukruzwa/domain/models/contact_class.dart';
+import 'package:ukruzwa/domain/models/group_class.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_event.dart';
 
@@ -11,26 +14,29 @@ class InscriptionBloc extends Bloc<InscriptionEvent, InscriptionState> {
     // });
 
     on<AddDataInscriptionEvent>((event, emit) async {
-      createGroup(
-        event.nomGrp,
-        event.setList,
-        event.styleGrp,
-        event.adresseRepet,
-        event.chanteur,
-        event.prixMinGrp,
-        event.endroitGrpAjouer,
+      final grouptemp = GroupClass(
+        nomGroupe: event.nomGrp,
+        setList: event.setList,
+        styles: event.styleGrp,
+        adresseRepet: event.adresseRepet,
+        nbChanteurs: event.chanteur,
+        prixMin: event.prixMinGrp,
+        endroitJouee: event.endroitGrpAjouer,
       );
+      grouptemp.createGroup();
 
-      createCandidat(
-        event.numTel,
-        event.numTelRemplacement,
+      final candidatTemp = CandidatClass(
+        numTel: event.numTel,
+        numTelBackup: event.numTelRemplacement,
       );
+      candidatTemp.createCandidat();
 
-      createContact(
-        event.nom,
-        event.prenom,
-        event.adresseContact,
+      final contactTemp = ContactClass(
+        nom: event.nom,
+        prenom: event.prenom,
+        adresseContact: event.adresseContact,
       );
+      contactTemp.createContact();
     });
 
     on<RetourEvent>((event, emit) async {
