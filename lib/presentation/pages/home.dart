@@ -6,6 +6,7 @@ import 'package:ukruzwa/presentation/bloc/home/home_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/home/home_event.dart';
 import 'package:ukruzwa/presentation/bloc/home/home_state.dart';
 import 'package:ukruzwa/presentation/pages/formulaire_inscription.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

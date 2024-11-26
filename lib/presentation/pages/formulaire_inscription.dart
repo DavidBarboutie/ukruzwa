@@ -1,10 +1,6 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ukruzwa/domain/models/group_class.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_bloc.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_state.dart';
 import 'package:ukruzwa/presentation/bloc/inscription/inscription_event.dart';

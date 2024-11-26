@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ukruzwa/presentation/pages/formulaire_inscription.dart';
+import 'package:ukruzwa/presentation/pages/formulaire_salle_spectacle.dart';
 import 'package:ukruzwa/utils/constants/firebase_options.dart';
 import 'package:ukruzwa/presentation/bloc/home/home_bloc.dart';
 import 'package:ukruzwa/presentation/pages/home.dart';
@@ -24,6 +24,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: Inscription());
+    return const MaterialApp(home: SalleSpectacle());
   }
 }

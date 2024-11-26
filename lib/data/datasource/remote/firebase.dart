@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ukruzwa/domain/models/candidat_class.dart';
-import 'package:ukruzwa/domain/models/contact_class.dart';
-import 'package:ukruzwa/domain/models/group_class.dart';
-import 'package:ukruzwa/domain/models/sono_class.dart';
 
 Future<List<Map<String, dynamic>>> getDocsInFirebase(String collection) async {
   //connexion a la BDD

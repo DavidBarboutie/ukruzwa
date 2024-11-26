@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ukruzwa/data/datasource/remote/firebase.dart';
 import 'package:ukruzwa/domain/models/candidat_class.dart';
 import 'package:ukruzwa/domain/models/contact_class.dart';
 import 'package:ukruzwa/domain/models/group_class.dart';

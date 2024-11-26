@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "750008653038",
+    "project_id": "ukruzwa-59e53",
+    "storage_bucket": "ukruzwa-59e53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750008653038:android:480e504d133845538e0fff",
+        "android_client_info": {
+          "package_name": "com.example.ukruzwa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWutKPPQp_mPyNao755I0MwmcseSdRXpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
